@@ -10,6 +10,8 @@ import Main from '../navigations/main';
 import Splash from './../screens/splash/index';
 import Login from './../screens/login/index';
 import Register from '../screens/register';
+import Task from '../screens/task';
+
 
 const RootStack = createStackNavigator();
 
@@ -20,11 +22,13 @@ export default function Navigator() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Main">
+        initialRouteName="Splash">
         <RootStack.Screen name="Main" component={Main} />
         <RootStack.Screen name="Splash" component={Splash} />
         <RootStack.Screen name="Login" component={Login} />
         <RootStack.Screen name="Register" component={Register} />
+        <RootStack.Screen name="Task" component={Task} />
+
       </RootStack.Navigator>
     </NavigationContainer>
   );

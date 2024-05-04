@@ -33,6 +33,8 @@ export default function Splash() {
   
     // Check internet connectivity
     setLoading('Vérifier la connectivité Internet ...');
+    //setConnectedDescription(<Image source={require('./mobeliteMonastir.png')} style={styles.logo} />);
+
     NetInfo.fetch().then((state) => {
       // Wait for 2 seconds before processing the connectivity state
       setTimeout(() => {
@@ -61,7 +63,7 @@ setTimeout(() => {
     setLoader(false);
 
     // Navigate to login
-    navigation.navigate('Login');
+    navigation.navigate('Main');
 }, 2000)
       setLoader(false);
     }
