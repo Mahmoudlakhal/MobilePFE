@@ -1,11 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    padding: 20,
+
   },
+  
+  scrollViewContainer: {
+    flexGrow: 1,
+    paddingBottom: 20, // Ajoutez un padding en bas pour éviter que le contenu ne soit caché sous la barre de défilement
+  },
+
   button: {
     backgroundColor: '#007bff',
     padding: 15,

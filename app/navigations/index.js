@@ -11,6 +11,11 @@ import Splash from './../screens/splash/index';
 import Login from './../screens/login/index';
 import Register from '../screens/register';
 import Task from '../screens/task';
+import Projet from '../screens/projet';
+import Listprojet from '../screens/listprojet';
+import  ProjectTab  from '../screens/projectTab';
+
+
 
 
 const RootStack = createStackNavigator();
@@ -28,6 +33,11 @@ export default function Navigator() {
         <RootStack.Screen name="Login" component={Login} />
         <RootStack.Screen name="Register" component={Register} />
         <RootStack.Screen name="Task" component={Task} />
+        <RootStack.Screen name="Projet" component={Projet} />
+        <RootStack.Screen name="Listprojet" component={Listprojet} />
+        <RootStack.Screen name="ProjectTab" component={ProjectTab} />
+
+
 
       </RootStack.Navigator>
     </NavigationContainer>

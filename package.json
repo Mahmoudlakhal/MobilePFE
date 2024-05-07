@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@intechnity/react-native-kanban-board": "^0.1.0",
     "@react-native-community/datetimepicker": "^8.0.0",
     "@react-native-community/netinfo": "^11.3.1",
     "@react-native-picker/picker": "^2.7.5",

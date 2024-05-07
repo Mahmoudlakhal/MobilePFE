@@ -3,7 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Register, Login, Splash ,Task} from '../screens';
+import { Register, Login, Splash ,Task, Projet, Listprojet , ProjectTab} from '../screens';
 
 const MainStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -21,6 +21,9 @@ function Main() {
       <MainStack.Screen name="Splash" component={Splash} />
       <MainStack.Screen name="Register" component={Register} />
       <MainStack.Screen name="Task" component={Task} />
+      <MainStack.Screen name="Projet" component={Task} />
+      <MainStack.Screen name="Listprojet" component={Task} />
+      <MainStack.Screen name="ProjectTab" component={ProjectTab} />
 
 
     </MainStack.Navigator>
@@ -50,8 +53,30 @@ function BottomTabNavigator() {
             <Icon color={color} name="folder" size={20} solid />
           ),
         }}
-      /> 
-      
+      />
+
+<BottomTab.Screen
+        name="Projet"
+        component={Projet}
+        options={{
+          title: 'Projet',
+          tabBarIcon: ({ color }) => (
+            <Icon color={color} name="folder" size={20} solid />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Listprojet"
+        component={Listprojet}
+        options={{
+          title: 'Listprojet',
+          tabBarIcon: ({ color }) => (
+            <Icon color={color} name="folder" size={20} solid />
+          ),
+        }}
+      />
+       
       <BottomTab.Screen
       name="Login"
       component={Login} 

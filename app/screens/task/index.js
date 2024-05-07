@@ -37,6 +37,8 @@ const Task = () => {
   };
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+
     <View style={styles.container}>
       <TextInput
         style={styles.input}
@@ -218,7 +220,10 @@ const Task = () => {
 
           </View>
         </Modal>
-    </View>
+    </View>    
+  
+  </ScrollView>
+
   );
 };
 
