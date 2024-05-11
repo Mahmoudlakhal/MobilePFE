@@ -22,7 +22,7 @@ const AddProject = () => {
       title,
       description,
       typeProjet,
-      //date_creation,
+     // date_creation,
     };
 
     fetch('http://192.168.1.14:8010/SpringMVC/projet/addProjet', {

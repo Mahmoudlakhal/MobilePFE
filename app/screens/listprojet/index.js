@@ -20,7 +20,7 @@ const ListProject = () => {
       .catch(error => {
         console.error('Erreur lors du chargement des projets:', error.message);
       });
-  }, []); // [] indique que cet effet ne s'exécute qu'une seule fois lors du montage initial
+  }, [projects]); // [] indique que cet effet ne s'exécute qu'une seule fois lors du montage initial
 
   const renderProjectItem = ({ item }) => (
     // Fonction pour afficher un élément de la liste des projets
@@ -41,8 +41,6 @@ const ListProject = () => {
         <Text style={styles.addProjectText}><Icon name="plus" size={12} color="gray" style={styles.icon} /> Add Project</Text>
        </View>
     </TouchableOpacity>
-
-
 
       <FlatList
         data={projects}

@@ -25,7 +25,7 @@ const Register = () => {
       projectRole
     };
   
-    // Send POST request to server
+    
  
   };
   

@@ -50,7 +50,7 @@ function BottomTabNavigator() {
         options={{
           title: 'Register',
           tabBarIcon: ({ color }) => (
-            <Icon color={color} name="folder" size={20} solid />
+            <Icon color={color} name="react" size={20} solid />
           ),
         }}
       />
@@ -61,7 +61,7 @@ function BottomTabNavigator() {
         options={{
           title: 'Projet',
           tabBarIcon: ({ color }) => (
-            <Icon color={color} name="folder" size={20} solid />
+            <Icon color={color} name="folder-plus" size={20} solid />
           ),
         }}
       />
