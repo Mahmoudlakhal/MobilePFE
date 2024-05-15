@@ -25,7 +25,7 @@ const AddProject = () => {
      // date_creation,
     };
 
-    fetch('http://192.168.1.14:8010/SpringMVC/projet/addProjet', {
+    fetch('http://192.168.1.14:8010/SpringMVC/projet/addProject', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -74,9 +74,11 @@ const AddProject = () => {
         onValueChange={(itemValue, itemIndex) => setTypeProjet(itemValue)}>
 
         <Picker.Item label="AUCUNE_SELECTION" value="AUCUNE_SELECTION" />
-        <Picker.Item label="HELLO" value="HELLO" />
-        <Picker.Item label="OK" value="OK" />
-        <Picker.Item label="HI" value="HI" />
+        <Picker.Item label="INTEGRATION" value="INTEGRATION" />
+        <Picker.Item label="DEVELOPPEMENT" value="DEVELOPPEMENT" />
+        <Picker.Item label="CONTABILITE" value="CONTABILITE" />
+        <Picker.Item label="ARCHITECTURAL" value="ARCHITECTURAL" />
+
 
       </Picker>
 

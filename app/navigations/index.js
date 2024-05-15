@@ -14,6 +14,7 @@ import Task from '../screens/task';
 import Projet from '../screens/projet';
 import Listprojet from '../screens/listprojet';
 import  ProjectTab  from '../screens/projectTab';
+import  DetailTask  from '../screens/detailsTask';
 
 
 
@@ -36,6 +37,7 @@ export default function Navigator() {
         <RootStack.Screen name="Projet" component={Projet} />
         <RootStack.Screen name="Listprojet" component={Listprojet} />
         <RootStack.Screen name="ProjectTab" component={ProjectTab} />
+        <RootStack.Screen name="DetailTask" component={DetailTask} />
 
 
 

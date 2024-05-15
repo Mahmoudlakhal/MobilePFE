@@ -3,7 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Register, Login, Splash ,Task, Projet, Listprojet , ProjectTab} from '../screens';
+import { Register, Login, Splash ,Task, Projet, Listprojet, ProjectTab } from '../screens';
+import  DetailTask  from '../screens/detailsTask';
 
 const MainStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ function Main() {
       <MainStack.Screen name="Projet" component={Task} />
       <MainStack.Screen name="Listprojet" component={Task} />
       <MainStack.Screen name="ProjectTab" component={ProjectTab} />
+      <MainStack.Screen name="DetailTask" component={DetailTask} />
 
 
     </MainStack.Navigator>
@@ -101,7 +103,7 @@ function BottomTabNavigator() {
 
 <BottomTab.Screen
         name="Paramétre"
-        component={Register}
+        component={DetailTask}
         options={{
           title: 'Paramétre',
           tabBarIcon: ({ color }) => (
