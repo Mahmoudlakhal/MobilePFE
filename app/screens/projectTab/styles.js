@@ -14,6 +14,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         // Couleur du texte blanche
     },
+    input: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginBottom: 15,
+      },
     addButtonContainer: {
         flexDirection: 'row', // Pour aligner les éléments horizontalement
         alignItems: 'center', // Pour aligner les éléments verticalement au centre
@@ -27,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Alignement vertical des éléments
         marginBottom: 20, // Espacement en bas du conteneur
       },
-      
+
     addButton: {
         backgroundColor: 'blue',
         borderRadius: 20,
@@ -135,6 +143,74 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
       },
     
+
+
+
+
+
+      background: {
+        flex: 1,
+        resizeMode: 'cover',
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+    },
+    addButton: {
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        borderRadius: 5,
+    },
+    addButtonText: {
+        color: '#fff',
+        fontSize: 16,
+    },
+    modalContainer: {
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 10,
+    },
+    scrollContainer: {
+        paddingBottom: 20,
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    modalDescription: {
+        fontSize: 16,
+        marginBottom: 20,
+    },
+    updateButton: {
+        padding: 10,
+        borderRadius: 5,
+        marginVertical: 5,
+    },
+    updateButtonText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 16,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+    },
+    userItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+    },
+    userItemSelected: {
+        backgroundColor: '#d3d3d3',
+    },
+    userItemText: {
+        fontSize: 16,
+    },
 });
 
 export default styles;

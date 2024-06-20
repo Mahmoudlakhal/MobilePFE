@@ -22,8 +22,8 @@ function Main() {
       <MainStack.Screen name="Splash" component={Splash} />
       <MainStack.Screen name="Register" component={Register} />
       <MainStack.Screen name="Task" component={Task} />
-      <MainStack.Screen name="Projet" component={Task} />
-      <MainStack.Screen name="Listprojet" component={Task} />
+      <MainStack.Screen name="Projet" component={Projet} />
+      <MainStack.Screen name="Listprojet" component={Listprojet} />
       <MainStack.Screen name="ProjectTab" component={ProjectTab} />
       <MainStack.Screen name="DetailTask" component={DetailTask} />
 
@@ -35,7 +35,7 @@ function Main() {
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="register"
+      initialRouteName="Listprojet"
       screenOptions={{
         tabBarInactiveTintColor: '#cdcdcd',
         tabBarActiveTintColor: 'red',

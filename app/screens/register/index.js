@@ -1,55 +1,62 @@
+//index.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput,ImageBackground, TouchableOpacity, Alert, ActivityIndicator ,Image} from 'react-native';
 import styles from './styles';
-import axios from 'axios';
+
 const Register = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [image, setImage] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [functionalite, setFunctionalite] = useState('');
-  const [privileges, setPrivileges] = useState('');
-  const [projectRole, setProjectRole] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = () => {
-    // Prepare user data
-    const userData = {
-      firstName,
-      lastName,
-      image,
-      email,
-      password,
-      functionalite,
-      privileges,
-      projectRole
-    };
-  
-    
- 
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    const userData = { username, email, phoneNumber, password };
+
+    try {
+      const response = await fetch('http://192.168.1.14:8050/Admin/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      } else {
+        Alert.alert('Utilisateur ajouté avec succès');
+      }
+
+      const data = await response.json();
+      console.log('Utilisateur ajouté avec succès:', data);
+
+      setUsername('');
+      setEmail('');
+      setPhoneNumber('');
+      setPassword('');
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'utilisateur:', error.message);
+      Alert.alert('Erreur lors de l\'ajout de l\'utilisateur:', error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
-  
-
 
   return (
     <View style={styles.container}>
+
+          <ImageBackground source={require('../assets/backgroundBleu.jpg')} style={styles.background}>
+
+            <Image source={require('../assets/agtialogo.png')} style={styles.image} />
+
       <TextInput
         style={styles.input}
-        placeholder="Prénom"
-        value={firstName}
-        onChangeText={text => setFirstName(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Nom de famille"
-        value={lastName}
-        onChangeText={text => setLastName(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Image"
-        value={image}
-        onChangeText={text => setImage(text)}
+        placeholder="Nom d'utilisateur"
+        value={username}
+        onChangeText={text => setUsername(text)}
       />
       <TextInput
         style={styles.input}
@@ -67,26 +74,20 @@ const Register = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Fonctionnalité"
-        value={functionalite}
-        onChangeText={text => setFunctionalite(text)}
+        placeholder="Numéro de téléphone"
+        value={phoneNumber}
+        onChangeText={text => setPhoneNumber(text)}
+        keyboardType="phone-pad"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Privilèges"
-        value={privileges}
-        onChangeText={text => setPrivileges(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Rôle dans le projet"
-        value={projectRole}
-        onChangeText={text => setProjectRole(text)}
-      />
-      <Button
-        title="S'inscrire"
-        onPress={handleSubmit}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#007BFF" />
+      ) : (
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>S'inscrire</Text>
+        </TouchableOpacity>
+      )}
+   </ImageBackground>
+
     </View>
   );
 };

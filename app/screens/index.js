@@ -8,4 +8,4 @@ import ProjectTab from './projectTab'
 
 
 
-export { Splash, Login, Register, Task, Projet, ProjectTab,Listprojet};
+export { Splash, Login, Register, Task, Projet, ProjectTab, Listprojet};
