@@ -4,6 +4,7 @@ import styles from './styles';
 import { Picker } from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker';
 import { useNavigation } from '@react-navigation/native'; // Import de useNavigation pour la navigation
+import settings, { Settings } from '../../config/settings';
 
 const Task = ({ route }) => {
   const [title, setTitle] = useState('');
@@ -23,7 +24,7 @@ const Task = ({ route }) => {
 
   useEffect(() => {
     if (taskId) {
-      fetch(`http://192.168.1.14:8010/SpringMVC/task/getTask/${taskId}`)
+      fetch(`${settings.apiUrl}:8010/SpringMVC/task/getTask/${taskId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -149,7 +150,7 @@ const Task = ({ route }) => {
             //  timePointage
             };
 
-            const url = taskId ? `http://192.168.1.14:8010/SpringMVC/task/updateTask/${taskId}` : 'http://192.168.1.14:8010/SpringMVC/task/addTask';
+            const url = taskId ?`${settings.apiUrl}:8010/SpringMVC/task/updateTask/${taskId}` : `${settings.apiUrl}:8010/SpringMVC/task/addTask`;
             const method = taskId ? 'PUT' : 'POST';
 
             fetch(url, {

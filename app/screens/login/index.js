@@ -4,6 +4,9 @@ import { useNavigation } from '@react-navigation/native'; // Importer useNavigat
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 import Modal from "react-native-modal";
+import Icon from 'react-native-vector-icons/FontAwesome5'; // Import FontAwesome5 icons
+import settings from '../../config/settings';
+
 
 const LoginScreen = () => {
   const navigation = useNavigation(); // Initialiser la navigation
@@ -11,7 +14,104 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [ModalVisibility, setModalVisibility] = useState(false);
+  const [modaltoken, setModalToken] = useState(false);
+  const [resettoken, setResetToken] = useState('');
+  const [newpasseword,   setNewpasseword] = useState('');
+  const [confirmpasseword,   setConfirmpasseword] = useState('');
+
+  
+  
+  
   const [email, setEmail] = useState('');
+
+  const handlesendtoken = async () => {
+    console.log('resettoken resettoken:',resettoken);
+    console.log('newpasseword newpasseword:',newpasseword);
+    console.log('confirmpasseword confirmpasseword:',confirmpasseword);
+
+
+
+    setIsLoading(true);
+  
+  if(resettoken.length<3){
+    Alert.alert('Error:', 'enter a valid token ');
+    return
+  }
+  // Password validation criteria
+  const passwordRegex = /^.{6}$/;
+
+  if (newpasseword.length<3) {
+    Alert.alert(
+      'Error',
+      'Password must be at least 6 characters long and contain at least one symbol and one number.'
+    );
+    return;
+  }
+
+  if(confirmpasseword != newpasseword){
+    Alert.alert('Error:', 'confirm passeword and new passeword must be the same');
+    return
+  }
+  console.log(`${settings.apiUrl}:8050/auth/savePassword/${resettoken}`);
+  console.log('newpasasa',newpasseword);
+
+  try {
+    // Create FormData object and append the new password
+    const formData = new FormData();
+    formData.append('newPassword', newpasseword);
+
+    const response = await fetch(`${settings.apiUrl}:8050/auth/savePassword/${resettoken}`, {
+      method: 'POST',
+      body: formData,
+    });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  else{
+
+    const data = await response.json();
+      console.log('Check ', data);
+      Alert.alert('Success:', 'your passeword has been correctly chaned');
+
+      Alert.alert(
+        'Success ',
+        'your passeword has been correctly chaned.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              
+             setModalToken(false);
+              setModalVisibility(false);
+              setNewpasseword()
+              setResetToken()
+              setEmail()
+
+              
+            },
+          },
+        ],
+        { cancelable: false });
+      
+  }
+      
+  
+    
+    } catch (error) {
+      console.error('Error:', error);
+      Alert.alert('Error:', error.message);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+
+
+
+
 const handleforgotpasseword = async ()=>{
    console.log('ok');
   setModalVisibility(true)
@@ -29,7 +129,7 @@ const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('email', email);
 
-    const response = await fetch('http://192.168.1.14:8050/auth/forgetpassword', {
+    const response = await fetch(`${settings.apiUrl}:8050/auth/forgetpassword`, {
       method: 'POST',
       body: formData,
       headers: {
@@ -45,7 +145,20 @@ const handleSubmit = async () => {
     console.log('Check your Mail:', data);
 
     if (data.user && data.user.length > 0) {
-      Alert.alert(data.user);
+      Alert.alert(
+        'Success to send token',
+        'Token has been sent. Please check your email and continue.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              setModalVisibility(false);
+
+              setModalToken(true);
+            },
+          },
+        ],
+        { cancelable: false });
     } else {
       Alert.alert(
         'Success to send token',
@@ -57,6 +170,7 @@ const handleSubmit = async () => {
                 return;
               } else {
                 setModalVisibility(false);
+                setModalToken(true)
               }
             }
           }
@@ -81,7 +195,7 @@ const handleSubmit = async () => {
     };
 
     try {
-      const response = await fetch('http://192.168.1.14:8050/auth/login', {
+      const response = await fetch(`${settings.apiUrl}:8050/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +217,7 @@ const handleSubmit = async () => {
           'Success logged in',
           data.email,
           [
-            { text: 'OK', onPress: () => navigation.replace('Listprojet') }, // Naviguer vers Listprojet
+            { text: 'OK', onPress: () => navigation.replace('Main') }, // Naviguer vers Listprojet
           ],
           { cancelable: false }
         );
@@ -123,16 +237,26 @@ const handleSubmit = async () => {
 
   return (
     <View style={styles.container}>
-              <ImageBackground source={require('../assets/backgroundBleu.jpg')} style={styles.background}>
+              <ImageBackground source={require('../assets/backgroundBleu.jpg')} style={styles.background}> 
 
-      <Image source={require('../assets/agtialogo.png')} style={styles.logo} />
+      <Image source={require('../assets/agtialogo.png')} style={styles.logo}/>
+      <View style={styles.card}>
+
       <Text style={styles.title}>Login</Text>
+      <View style={styles.inputContainer}>
+
+      <Icon name="user" size={20} color="#007BFF" style={styles.inputIcon} />
       <TextInput
         style={styles.input}
         placeholder="Username"
         onChangeText={text => setUsername(text)}
         value={username}
       />
+      </View>
+     
+
+      <View style={styles.inputContainer}>
+      <Icon name="lock" size={20} color="#007BFF" style={styles.inputIcon} />
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -140,20 +264,28 @@ const handleSubmit = async () => {
         value={password}
         secureTextEntry
       />
-      <TouchableOpacity onPress={handleforgotpasseword} style={{alignSelf:'flex-end', marginRight:50}}><Text style={{color:'#ffffff'}} >Forgot passeword</Text>
+      </View>
+
+     
+      
+      <TouchableOpacity onPress={handleforgotpasseword} style={{alignSelf:'flex-end', marginRight:8}}><Text style={{color:'#007BFF'}} >mot de pass oublier ?</Text>
       </TouchableOpacity>
             
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
       <View style={styles.linksContainer}>
-        <Text style={styles.linkText}>
-          Have no account? <Text style={styles.createAccount}>Create account</Text>
-        </Text>
-      </View>
+      <Text style={styles.linkText}>  
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <Text style={styles.linkText}>vous n'avez pas un compte ?</Text>
+        </TouchableOpacity>
+      </Text>
+    </View>
+      
       {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
-      </ImageBackground>
+      </View></ImageBackground>
 
 
 
@@ -189,6 +321,70 @@ const handleSubmit = async () => {
         </View>
       </View>
     </Modal>
+
+   
+
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modaltoken}
+        onRequestClose={() => setModalToken(false)}
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Enter token and new passeword here to reset your password</Text>
+
+          <View>
+            <Text>Token</Text>
+          <TextInput
+            style={[styles.modalinput,{width:'80%'}]}
+            placeholder="Enter token"
+            value={resettoken}
+            onChangeText={setResetToken}
+            autoCapitalize="none"
+          />
+
+           <Text>New PAsseword</Text>
+          <TextInput
+            style={[styles.modalinput,{width:'80%'}]}
+            placeholder="Enter New passeword"
+            value={newpasseword}
+            onChangeText={setNewpasseword}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
+          <Text>Confirm PAsseword</Text>
+          <TextInput
+            style={[styles.modalinput,{width:'80%'}]}
+            placeholder="Enter New passeword"
+            value={confirmpasseword}
+            onChangeText={setConfirmpasseword}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
+          </View>
+        
+          <View style={styles.ModalbuttonContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalToken(false);
+                setModalVisibility(true);
+                setResetToken()
+                setConfirmpasseword()
+                setNewpasseword()
+              }}
+              style={[styles.modalbutton, styles.modalcancelButton]}
+            >
+              <Text style={styles.modalbuttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handlesendtoken}
+              style={[styles.modalbutton, styles.modalsubmitButton]}
+            >
+              <Text style={styles.modalbuttonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 </View>
   );
 };

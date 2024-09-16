@@ -5,7 +5,7 @@ import Task from './task';
 import Projet from './projet';
 import Listprojet from './listprojet';
 import ProjectTab from './projectTab'
+import ProfilScreen from './profil';
 
 
-
-export { Splash, Login, Register, Task, Projet, ProjectTab, Listprojet};
+export { Splash, Login, Register, Task, Projet, ProjectTab, Listprojet,ProfilScreen};

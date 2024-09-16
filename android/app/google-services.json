@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "435251541875",
+    "project_id": "agtia-b8b06",
+    "storage_bucket": "agtia-b8b06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435251541875:android:45946aa5c7d24de040f706",
+        "android_client_info": {
+          "package_name": "com.pfe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqCAKa_fmsJvvRvsWBrD733IWtKBJ80Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435251541875:android:7c9b59996d1bcb1640f706",
+        "android_client_info": {
+          "package_name": "serviceAccountKey.json"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqCAKa_fmsJvvRvsWBrD733IWtKBJ80Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

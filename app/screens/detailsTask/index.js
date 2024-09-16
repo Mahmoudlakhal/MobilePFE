@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import styles from './styles'; // Importer les styles depuis styles.js
+import settings, { Settings } from '../../config/settings';
 
 const TaskDetails = ({ route }) => {
   const [task, setTask] = useState(null);
 
   useEffect(() => {
-    fetch('http://192.168.1.14:8010/SpringMVC/task/getTask/11')
+    fetch(`${settings.apiUrl}:8010/SpringMVC/task/getTask/11`)
       .then(response => response.json())
       .then(data => {
         console.log('Réponse de l\'API:', data);

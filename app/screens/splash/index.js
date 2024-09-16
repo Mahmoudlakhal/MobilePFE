@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity, PermissionsAndroid , Image} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import messaging from '@react-native-firebase/messaging';
 
 export default function Splash() {
   const [Loading, setLoading] = useState('');
@@ -14,7 +15,7 @@ export default function Splash() {
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
   const [userChecked, setUserChecked] = useState(false); // New state to track user check
-
+const [interneterror,setInternetError] = useState(false)
   useEffect(() => {
     const checkuser = async () => {
       const userData = await AsyncStorage.getItem('User');
@@ -51,6 +52,10 @@ export default function Splash() {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('Notification permission granted');
+         // show token
+       
+   
+         console.log('FCMtoken',fcmToken);
         navigation.navigate('Main');
       } else {
         console.log('Notification permission denied');
@@ -76,24 +81,31 @@ export default function Splash() {
     });
   };
 
-  const handleConnectivityChange = (state) => {
+  const handleConnectivityChange = async (state) => {
     console.log('state', state);
     if (!state.isConnected) {
       setLoading('Pas de connexion Internet');
       setLoader(false);
       setConnectedDescription('Assurez-vous que le wifi ou les données mobiles sont activés, puis réessayez.');
+      setInternetError(true)
     } else {
+      setInternetError(false)
+
       setLoading('Checking user connectivity');
       setConnectedDescription('Checking if user connecting or not ....');
 
-      setTimeout(() => {
-        console.log('Checking user connectivity');
+      setTimeout(async () => {
+        console.log('Attendre quelque seconde');
         console.log('useruser', user);
 
         if (!user) {
           navigation.navigate('Login');
         }
         else {
+          await messaging().registerDeviceForRemoteMessages();
+          const fcmToken = await messaging().getToken();
+          console.log('fcmttoken',fcmToken);
+          
           navigation.replace('Main');
         }
 
@@ -108,14 +120,15 @@ export default function Splash() {
 
   return (
     <View style={styles.container}>
-      <Text>{Loading}</Text>
-      <Text>{ConnectedDescription}</Text>
-      {ConnectedDescription.length !== 0 && (
-        <TouchableOpacity onPress={Reessayer}>
-          <Text>Réessayer</Text>
-        </TouchableOpacity>
-      )}
-      {Loader && <ActivityIndicator size="large" color="#0000ff" />}
-    </View>
+    <Image source={require('../assets/agtialogo.png')} style={styles.logo} />
+    <Text style={styles.loadingText}>{Loading}</Text>
+    <Text style={styles.descriptionText}>{ConnectedDescription}</Text>
+    {interneterror && (
+      <TouchableOpacity style={styles.retryButton} onPress={Reessayer}>
+        <Text style={styles.retryButtonText}>Réessayer</Text>
+      </TouchableOpacity>
+    )}
+    {Loader && <ActivityIndicator size="large" color="#0000ff" />}
+  </View>
   );
 }

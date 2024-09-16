@@ -1,6 +1,11 @@
 import React from 'react';
-import Navigator from './navigations/index';
+import { MenuProvider } from 'react-native-popup-menu';
+import Navigator from './navigations/index'; // Ensure the correct path to your Navigator
 
 export default function Index() {
-  return <Navigator />;
+  return (
+    <MenuProvider>
+      <Navigator />
+    </MenuProvider>
+  );
 }

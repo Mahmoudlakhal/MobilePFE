@@ -3,7 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Register, Login, Splash ,Task, Projet, Listprojet, ProjectTab } from '../screens';
+import { Register, Login, Splash ,Task, Projet, Listprojet, ProjectTab, ProfilScreen } from '../screens';
 import  DetailTask  from '../screens/detailsTask';
 
 const MainStack = createStackNavigator();
@@ -46,7 +46,7 @@ function BottomTabNavigator() {
         },
       }}>
  
-      <BottomTab.Screen
+   {/*<BottomTab.Screen
         name="Register"
         component={Register}
         options={{
@@ -55,31 +55,22 @@ function BottomTabNavigator() {
             <Icon color={color} name="react" size={20} solid />
           ),
         }}
-      />
+      />*/}   
 
-<BottomTab.Screen
-        name="Projet"
-        component={Projet}
-        options={{
-          title: 'Projet',
-          tabBarIcon: ({ color }) => (
-            <Icon color={color} name="folder-plus" size={20} solid />
-          ),
-        }}
-      />
+
 
       <BottomTab.Screen
         name="Listprojet"
         component={Listprojet}
         options={{
-          title: 'Listprojet',
+          title: 'Projets',
           tabBarIcon: ({ color }) => (
             <Icon color={color} name="folder" size={20} solid />
           ),
         }}
       />
        
-      <BottomTab.Screen
+    {/*  <BottomTab.Screen
       name="Login"
       component={Login} 
       options={{
@@ -88,13 +79,13 @@ function BottomTabNavigator() {
           <Icon color={color} name="user" size={20} solid />
         ),
       }}
-    />
+    />*/}
 
     <BottomTab.Screen
-      name="Task"
-      component={Task}
+      name="Projet"
+      component={Projet}
       options={{
-        title: 'Task',
+        title: 'Ajouter',
         tabBarIcon: ({ color }) => (
           <Icon color={color} name="plus" size={20} solid />
         ),
@@ -102,12 +93,12 @@ function BottomTabNavigator() {
     />
 
 <BottomTab.Screen
-        name="Paramétre"
-        component={DetailTask}
+        name="Profil"
+        component={ProfilScreen}
         options={{
-          title: 'Paramétre',
+          title: 'Profil',
           tabBarIcon: ({ color }) => (
-        <Icon color={color} name="cog" size={20} solid />           ),
+        <Icon color={color} name="user" size={20} solid />           ),
         }}
       />
 

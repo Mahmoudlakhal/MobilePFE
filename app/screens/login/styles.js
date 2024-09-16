@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   input: {
-    width: '85%',
+    width: '95%',
     height: 50,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 10,
@@ -53,9 +53,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   linkText: {
-    color: '#ffffff',
+    color: '#007BFF',
     marginHorizontal: 5,
     fontSize: 16,
+  },
+  inputIcon: {
+    marginRight: 10,
   },
   createAccount: {
     color: '#007BFF',
@@ -65,9 +68,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-
-
-
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    backgroundColor: '#f9f9f9',
+  },
 
   modalContainer: {
     justifyContent: 'center',
@@ -115,6 +125,18 @@ const styles = StyleSheet.create({
   modalbuttonText: {
     color: 'white',
     fontSize: 16,
+  },
+  card: {
+    width: '80%',
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    alignItems: 'center',
   },
 });
 
